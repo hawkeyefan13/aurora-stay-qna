@@ -16,7 +16,7 @@ def retrieve(query: str, k: int = 2,vectorstore=None) -> list[str]:
 def generate(query, retrieved_chunks,model) -> str:
 
     prompt = f"""
-    You are an AI assistant answering questions about medical insurance policies.
+    You are an AI assistant answering questions about hotel policies.
 
     User Query:
     {query}
@@ -25,18 +25,14 @@ def generate(query, retrieved_chunks,model) -> str:
     {retrieved_chunks}
 
     Rules:
-    1. Use only information explicitly supported by the retrieved policy information.
-    2. Do not use outside knowledge, assumptions, or information not present in the retrieved policy information.
-    3. Include all relevant information needed to answer the query completely.
-    4. Do not omit important conditions, exclusions, limitations, exceptions, or coverage details.
-    5. Focus only on information directly relevant to the user's query.
-    6. Do not include unrelated information from the retrieved policy information.
-    7. Answer the user's specific question directly and ensure the response addresses what was asked.
-    8. Keep the answer concise, clear, and easy to understand.
-    9. Do not invent benefits, exclusions, limits, waiting periods, conditions, or coverage details.
-    10. If the information is insufficient, say:
-        "The available policy documents do not contain enough information to answer this question."
-        If the retrieved information conflicts, clearly mention the conflict.
+    1. Use only information explicitly stated in the retrieved policy information.
+    2. Do not use outside knowledge or make assumptions about hotel policies, fees, times, or property-specific rules.
+    3. Answer the user's specific question directly, and mention only details relevant to it.
+    4. Include all relevant conditions, exceptions, deadlines, fees, and property-specific differences needed for a complete answer.
+    5. Do not invent or approximate amounts, times, or policy terms; quote them exactly as written.
+    6. If different properties or rate plans have different rules and the query does not specify one, state the differences rather than picking one.
+    7. If the retrieved information does not contain enough to answer, say: "I don't have enough information in the hotel policy documents to answer this question. Please contact the hotel directly for assistance."
+    8. Keep the answer concise, clear, and written in a professional, guest-friendly tone.
 
     Answer:
     """
